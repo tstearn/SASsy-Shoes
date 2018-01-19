@@ -20,8 +20,6 @@ import {appRoutes} from "./app-routing.module";
     BrowserModule,
     CoreModule,
     AppBootstrapModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     AlertModule.forRoot(),
     TypeaheadModule.forRoot(),

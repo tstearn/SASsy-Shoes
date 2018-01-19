@@ -1,16 +1,18 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../../app/core/domain/models";
 import {ProductService} from "../../app/core/services/product.service";
 import * as _ from 'lodash';
+import {ComponentCanDeactivate} from "../core/domain/component-can-deactivate";
 
 @Component({
   selector: 'sassy-inventory',
   templateUrl: 'inventory.component.html',
   styleUrls: ['inventory.component.less']
 })
-export class InventoryComponent implements OnInit{
+export class InventoryComponent implements OnInit, ComponentCanDeactivate{
   productForm: FormGroup;
+  isDirty = false;
   showErrors = false;
   isNewProduct = true;
   productLookups: any[];
@@ -39,6 +41,12 @@ export class InventoryComponent implements OnInit{
   }
 
   ngOnInit() {
+    //When form changes, mark as dirty
+    this.productForm.valueChanges
+      .subscribe(()=>{
+        this.isDirty = true;
+      });
+
     this.descInput.nativeElement.focus();
   }
 
@@ -84,6 +92,7 @@ export class InventoryComponent implements OnInit{
         sizes: this.productForm.get("sizes").value
       };
       this.productService.upsertProduct(product).then(()=>{
+        this.isDirty = false;
         this.notificationMsg = "Saved product successfully";
         if(this.isNewProduct) {
           this.showErrors = false;
@@ -112,5 +121,10 @@ export class InventoryComponent implements OnInit{
 
       this.setProductLookups();
     })
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate() : boolean {
+    return !this.isDirty;
   }
 }

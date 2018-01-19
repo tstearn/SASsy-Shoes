@@ -5,6 +5,7 @@ import {GuidService} from "./services/guid.service";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {NavBarComponent} from "./components/navbar/navbar.component";
+import {PendingChangesGuard} from "./services/pending-changes.guard";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import {NavBarComponent} from "./components/navbar/navbar.component";
     CommonModule,
     RouterModule
   ],
-  providers: [ProductService,GuidService],
+  providers: [ProductService,GuidService,PendingChangesGuard],
   exports: [
     NavBarComponent
   ]

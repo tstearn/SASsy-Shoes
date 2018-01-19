@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
+import {PendingChangesGuard} from "../core/services/pending-changes.guard";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import {SharedModule} from "../shared/shared.module";
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: '', component: InventoryComponent}
+      {path: '', component: InventoryComponent, canDeactivate: [PendingChangesGuard]}
     ]),
     SharedModule
   ],
