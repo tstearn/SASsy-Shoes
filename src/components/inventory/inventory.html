@@ -1,0 +1,110 @@
+<div class="inventory">
+  <div class="inventory-content">
+    <h3>Edit Product List</h3>
+    <alert type="success" dismissOnTimeout="3000" *ngIf="notificationMsg">
+      {{ notificationMsg }}
+    </alert>
+    <div class="operation-type form-group">
+        <span>
+          <input type="radio" name="productType" value="new" checked (click)="setNewProduct(true)"/>New Product
+        </span>
+      <span>
+          <input type="radio" name="productType" value="existing" (click)="setNewProduct(false)"/>Existing Product
+        </span>
+    </div>
+    <div class="form-group" *ngIf="!isNewProduct">
+      <div>
+        Select product:
+      </div>
+      <div>
+        <input [(ngModel)]="selectedProductLookup"
+               [typeahead]="productLookups"
+               [typeaheadScrollable]="true"
+               [typeaheadOptionsInScrollableView]="5"
+               typeaheadOptionField="description"
+               (typeaheadOnSelect)="onProductSelect()"
+               class="form-control"/>
+      </div>
+    </div>
+    <form [formGroup]="productForm"
+          (ngSubmit)="onSubmit()"
+          novalidate>
+      <div class="form-group">
+        <div>
+          Description:
+        </div>
+        <div>
+          <input type="text"  formControlName="description" #description/>
+        </div>
+        <div *ngIf="showErrors && productForm.hasError('required','description')"
+             class="error">
+          Description is required
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          Style:
+        </div>
+        <div>
+          <select formControlName="style">
+            <option *ngFor="let style of styles" [value]="style">{{ style}}</option>
+          </select>
+        </div>
+        <div *ngIf="showErrors && productForm.hasError('required','style')"
+             class="error">
+          Style is required
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          Price:
+        </div>
+        <div>
+          <input type="number"  formControlName="price" step="0.01"/>
+        </div>
+        <div *ngIf="showErrors && productForm.hasError('required','price')"
+             class="error">
+          Price is required
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          Colors:
+        </div>
+        <div>
+          <select formControlName="colors" multiple>
+            <option *ngFor="let color of colorMap" [value]="color.code">{{ color.desc }}</option>
+          </select>
+        </div>
+        <div *ngIf="showErrors && productForm.hasError('required','colors')"
+             class="error">
+          Colors is required
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          Sizes:
+        </div>
+        <div>
+            <select formControlName="sizes" multiple>
+              <option *ngFor="let size of sizes" [value]="size">{{ size}}</option>
+            </select>
+        </div>
+        <div *ngIf="showErrors && productForm.hasError('required','sizes')"
+             class="error">
+          Sizes is required
+        </div>
+      </div>
+      <div class="button-bar">
+        <div class="pull-right">
+          <button type="button"
+                  class="btn"
+                  *ngIf="!isNewProduct"
+                  [disabled]="!selectedProductSku"
+                  (click)="onDelete()">Delete</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
