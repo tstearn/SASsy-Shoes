@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {SafeHtml, DomSanitizer} from "@angular/platform-browser";
-import {ProductBrief} from "../../domain/models";
+import {ProductBrief} from "../../core/domain/models";
 
 @Component({
   selector: 'sassy-product-brief',
@@ -19,7 +19,7 @@ import {ProductBrief} from "../../domain/models";
       </div>
     </div>
   `,
-  styleUrls: ['./product-brief.less']
+  styleUrls: ['./product-brief.component.less']
 })
 export class ProductBriefComponent {
   @Input() product: ProductBrief;

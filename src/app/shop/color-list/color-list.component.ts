@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from "@angular/core";
          class="color-square">
     </div>
   `,
-  styleUrls: ['color-list.less']
+  styleUrls: ['color-list.component.less']
 })
 export class ColorListComponent{
   @Input() colors: string[];

@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Product} from "../../domain/models";
-import {ProductService} from "../../services/product.service";
+import {Product} from "../../app/core/domain/models";
+import {ProductService} from "../../app/core/services/product.service";
 import * as _ from 'lodash';
 
 @Component({
   selector: 'sassy-inventory',
-  templateUrl: 'inventory.html',
-  styleUrls: ['inventory.less']
+  templateUrl: 'inventory.component.html',
+  styleUrls: ['inventory.component.less']
 })
 export class InventoryComponent implements OnInit{
   productForm: FormGroup;

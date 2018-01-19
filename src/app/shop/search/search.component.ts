@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
-import {ProductService, FacetFilter} from "../../services/product.service";
-import {FacetGroup} from "../../domain/models";
-import {FacetChangeEvent} from "./search-facet/search-facet";
 import * as _ from 'lodash';
+import {FacetGroup} from "../../core/domain/models";
+import {FacetFilter, ProductService} from "../../core/services/product.service";
+import {FacetChangeEvent} from "./search-facet/search-facet.component";
 
 
 @Component({
