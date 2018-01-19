@@ -4,15 +4,15 @@ import {Product} from "../../app/core/domain/models";
 import {ProductService} from "../../app/core/services/product.service";
 import * as _ from 'lodash';
 import {ComponentCanDeactivate} from "../core/domain/component-can-deactivate";
+import {AbstractEditableComponent} from "../core/domain/AbstractEditableComponent";
 
 @Component({
   selector: 'sassy-inventory',
   templateUrl: 'inventory.component.html',
   styleUrls: ['inventory.component.less']
 })
-export class InventoryComponent implements OnInit, ComponentCanDeactivate{
+export class InventoryComponent extends AbstractEditableComponent implements OnInit{
   productForm: FormGroup;
-  isDirty = false;
   showErrors = false;
   isNewProduct = true;
   productLookups: any[];
@@ -26,6 +26,7 @@ export class InventoryComponent implements OnInit, ComponentCanDeactivate{
   @ViewChild("descInput") private descInput: ElementRef;
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
+    super();
     this.productForm = this.fb.group(({
       description: ['', Validators.required],
       style: ['', Validators.required],
@@ -121,10 +122,5 @@ export class InventoryComponent implements OnInit, ComponentCanDeactivate{
 
       this.setProductLookups();
     })
-  }
-
-  @HostListener('window:beforeunload')
-  canDeactivate() : boolean {
-    return !this.isDirty;
   }
 }

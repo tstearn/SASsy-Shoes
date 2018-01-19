@@ -1,7 +1,7 @@
 import {CanDeactivate} from "@angular/router";
-import {ComponentCanDeactivate} from "../domain/component-can-deactivate";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
+import {ComponentCanDeactivate} from "../domain/ComponentCanDeactivate";
 
 @Injectable()
 export class PendingChangesGuard implements CanDeactivate<ComponentCanDeactivate> {
