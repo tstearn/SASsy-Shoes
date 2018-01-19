@@ -23,79 +23,87 @@
                [typeaheadOptionsInScrollableView]="5"
                typeaheadOptionField="description"
                (typeaheadOnSelect)="onProductSelect()"
-               class="form-control"/>
+               class="form-control search-box"
+               #searchInput/>
       </div>
     </div>
     <form [formGroup]="productForm"
           (ngSubmit)="onSubmit()"
+          style="display: block;width: 700px"
           novalidate>
-      <div class="form-group">
-        <div>
-          Description:
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div>
+              Description:
+            </div>
+            <div>
+              <input type="text"  formControlName="description" #descInput/>
+            </div>
+            <div *ngIf="showErrors && productForm.hasError('required','description')"
+                 class="error">
+              Description is required
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              Style:
+            </div>
+            <div>
+              <select formControlName="style">
+                <option *ngFor="let style of styles" [value]="style">{{ style}}</option>
+              </select>
+            </div>
+            <div *ngIf="showErrors && productForm.hasError('required','style')"
+                 class="error">
+              Style is required
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              Price:
+            </div>
+            <div>
+              <input type="number"  formControlName="price" step="0.01"/>
+            </div>
+            <div *ngIf="showErrors && productForm.hasError('required','price')"
+                 class="error">
+              Price is required
+            </div>
+          </div>
         </div>
-        <div>
-          <input type="text"  formControlName="description" #description/>
-        </div>
-        <div *ngIf="showErrors && productForm.hasError('required','description')"
-             class="error">
-          Description is required
+        <div class="col-md-6">
+          <div class="form-group">
+            <div>
+              Colors:
+            </div>
+            <div>
+              <select formControlName="colors" multiple>
+                <option *ngFor="let color of colorMap" [value]="color.code">{{ color.desc }}</option>
+              </select>
+            </div>
+            <div *ngIf="showErrors && productForm.hasError('required','colors')"
+                 class="error">
+              Colors is required
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              Sizes:
+            </div>
+            <div>
+              <select formControlName="sizes" multiple>
+                <option *ngFor="let size of sizes" [value]="size">{{ size}}</option>
+              </select>
+            </div>
+            <div *ngIf="showErrors && productForm.hasError('required','sizes')"
+                 class="error">
+              Sizes is required
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <div>
-          Style:
-        </div>
-        <div>
-          <select formControlName="style">
-            <option *ngFor="let style of styles" [value]="style">{{ style}}</option>
-          </select>
-        </div>
-        <div *ngIf="showErrors && productForm.hasError('required','style')"
-             class="error">
-          Style is required
-        </div>
-      </div>
-      <div class="form-group">
-        <div>
-          Price:
-        </div>
-        <div>
-          <input type="number"  formControlName="price" step="0.01"/>
-        </div>
-        <div *ngIf="showErrors && productForm.hasError('required','price')"
-             class="error">
-          Price is required
-        </div>
-      </div>
-      <div class="form-group">
-        <div>
-          Colors:
-        </div>
-        <div>
-          <select formControlName="colors" multiple>
-            <option *ngFor="let color of colorMap" [value]="color.code">{{ color.desc }}</option>
-          </select>
-        </div>
-        <div *ngIf="showErrors && productForm.hasError('required','colors')"
-             class="error">
-          Colors is required
-        </div>
-      </div>
-      <div class="form-group">
-        <div>
-          Sizes:
-        </div>
-        <div>
-            <select formControlName="sizes" multiple>
-              <option *ngFor="let size of sizes" [value]="size">{{ size}}</option>
-            </select>
-        </div>
-        <div *ngIf="showErrors && productForm.hasError('required','sizes')"
-             class="error">
-          Sizes is required
-        </div>
-      </div>
-      <div class="button-bar">
+      <div class="button-bar row">
         <div class="pull-right">
           <button type="button"
                   class="btn"

@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Product, ShoeWidth} from "../../domain/models";
+import {Product} from "../../domain/models";
 import {ProductService} from "../../services/product.service";
 import * as _ from 'lodash';
 
@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   templateUrl: 'inventory.html',
   styleUrls: ['inventory.less']
 })
-export class InventoryComponent{
+export class InventoryComponent implements OnInit{
   productForm: FormGroup;
   showErrors = false;
   isNewProduct = true;
@@ -20,6 +20,8 @@ export class InventoryComponent{
   colorMap: any[];
   sizes: number[];
   notificationMsg = null;
+  //Used to automatically focus
+  @ViewChild("descInput") private descInput: ElementRef;
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group(({
@@ -34,6 +36,10 @@ export class InventoryComponent{
       this.colorMap = result.colorMap;
       this.sizes = result.sizes;
     });
+  }
+
+  ngOnInit() {
+    this.descInput.nativeElement.focus();
   }
 
   setNewProduct(value: boolean) {
