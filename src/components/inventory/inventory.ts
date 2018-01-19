@@ -49,10 +49,12 @@ export class InventoryComponent implements OnInit{
     }
   }
 
-  private setProductLookups() : Promise<any>{
-    return this.productService.getAllProductBriefs().then((lookups)=>{
+  private setProductLookups(){
+    let lookupsObs = this.productService.getAllProductBriefs();
+    lookupsObs.subscribe((lookups)=>{
       this.productLookups = lookups;
     });
+    return lookupsObs.toPromise();
   }
 
   onProductSelect() {

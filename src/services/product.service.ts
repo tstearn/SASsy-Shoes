@@ -33,8 +33,8 @@ export class ProductService {
     this.facets = this.genFacets();
   }
 
-  getAllProductBriefs() : Promise<ProductBrief[]> {
-    return Observable.of(_.map(this.products, product=>this.productToProductBrief(product)) as ProductBrief[]).toPromise();
+  getAllProductBriefs() : Observable<ProductBrief[]> {
+    return Observable.of(_.map(this.products, product=>this.productToProductBrief(product)) as ProductBrief[]);
   }
 
   getProduct(sku: string) : Promise<Product> {
@@ -53,7 +53,7 @@ export class ProductService {
     }).toPromise()
   }
 
-  searchProducts(searchRequest: ProductSearchRequest) : Promise<ProductBrief[]>  {
+  searchProducts(searchRequest: ProductSearchRequest) : Observable<ProductBrief[]>  {
     let filteredProds = this.products;
 
     if(searchRequest.searchText) {
@@ -63,7 +63,7 @@ export class ProductService {
     let facets = <FacetFilter[]>_.filter(searchRequest.facetFilters,facetFilter=> facetFilter.values.length > 0);
     filteredProds= this.filterByFacets(filteredProds,facets);
 
-    return Observable.of(_.map(filteredProds,this.productToProductBrief)).toPromise();
+    return Observable.of(_.map(filteredProds,this.productToProductBrief));
   }
 
   upsertProduct(product: Product) : Promise<Product>{

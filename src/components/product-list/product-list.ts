@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
           <sassy-search></sassy-search>
         </div>
         <div class="col-md-10 product-list">
-            <div *ngFor="let product of products" class="product-item">
+            <div *ngFor="let product of products | async" class="product-item">
               <sassy-product-brief [product]="product"></sassy-product-brief>
             </div>
          </div>
@@ -20,19 +20,15 @@ import {Observable} from "rxjs";
   styleUrls: ['product-list.less']
 })
 export class ProductList implements OnInit{
-  products: ProductBrief[];
+  products: Observable<ProductBrief[]>;
 
   constructor(private productService: ProductService) {
-    productService.getAllProductBriefs().then((briefs)=>{
-      this.products = briefs;
-    });
+    this.products = productService.getAllProductBriefs();
   }
 
   ngOnInit() {
     this.productService.searchEvent.subscribe((searchReq: ProductSearchRequest)=>{
-     this.productService.searchProducts(searchReq).then((briefs)=>{
-       this.products = briefs;
-     })
+      this.products = this.productService.searchProducts(searchReq);
     });
   }
 }
