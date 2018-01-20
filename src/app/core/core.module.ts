@@ -1,11 +1,13 @@
-import {AlertModule, TypeaheadModule} from "ngx-bootstrap";
 import {NgModule} from "@angular/core";
-import {ProductService} from "./services/product.service";
 import {GuidService} from "./services/guid.service";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {NavBarComponent} from "./components/navbar/navbar.component";
 import {PendingChangesGuard} from "./services/pending-changes.guard";
+import {ProductGenerationService} from "./services/product-generation.service";
+import {ProductMemoryService} from "./services/product-memory.service";
+import {ProductService} from "./services/product.service";
+
 
 @NgModule({
   declarations: [
@@ -15,7 +17,12 @@ import {PendingChangesGuard} from "./services/pending-changes.guard";
     CommonModule,
     RouterModule
   ],
-  providers: [ProductService,GuidService,PendingChangesGuard],
+  providers: [
+    ProductGenerationService,
+    {provide: ProductService, useClass: ProductMemoryService},
+    GuidService,
+    PendingChangesGuard
+  ],
   exports: [
     NavBarComponent
   ]

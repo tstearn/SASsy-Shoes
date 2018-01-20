@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'sassy-stars',
-  styles: [ '.starrating { color: #e5640b; }' ],
-  templateUrl: 'stars.component.html'
+  templateUrl: 'stars.component.html',
+  styleUrls: ['stars.component.less']
 })
 export default class StarsComponent {
   private _rating: number;

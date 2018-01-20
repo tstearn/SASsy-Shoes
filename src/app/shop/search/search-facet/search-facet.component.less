@@ -1,3 +1,4 @@
+@import "~assets/variables";
 div {
   position: relative;
 
@@ -9,7 +10,7 @@ div {
     padding: 14px 9px 9px;
     text-transform: uppercase;
     color: #585858;
-    border-bottom: 1px #f1ccb1 solid;
+    border-bottom: 1px @orange-border solid;
     clear: both;
 
     .facetLabel {
@@ -53,11 +54,11 @@ div {
       }
       li.selected {
         background-position: left 98%;
-        color: #e5640b;
+        color: @orange-accent;
         font-weight: 700;
       }
       li:hover {
-        color: #e5640b;
+        color: @orange-accent;
       }
     }
   }

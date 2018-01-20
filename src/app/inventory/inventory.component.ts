@@ -1,10 +1,9 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../../app/core/domain/models";
-import {ProductService} from "../../app/core/services/product.service";
 import * as _ from 'lodash';
-import {ComponentCanDeactivate} from "../core/domain/component-can-deactivate";
 import {AbstractEditableComponent} from "../core/domain/AbstractEditableComponent";
+import {ProductService} from "../core/services/product.service";
 
 @Component({
   selector: 'sassy-inventory',
