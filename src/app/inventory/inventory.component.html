@@ -1,35 +1,38 @@
-<div class="inventory">
-  <div class="inventory-content">
+<div class="inventory container">
+  <div class="row title-bar">
     <h3>Edit Product List</h3>
+  </div>
+  <div class="row">
     <alert type="success" dismissOnTimeout="3000" *ngIf="notificationMsg">
       {{ notificationMsg }}
     </alert>
+  </div>
+  <div class="row">
     <div class="operation-type form-group">
-        <span>
-          <input type="radio" name="productType" value="new" checked (click)="setNewProduct(true)"/>New Product
-        </span>
       <span>
-          <input type="radio" name="productType" value="existing" (click)="setNewProduct(false)"/>Existing Product
-        </span>
+        <input type="radio" name="productType" value="new" checked (click)="setNewProduct(true)"/>New Product
+      </span>
+      <span>
+        <input type="radio" name="productType" value="existing" (click)="setNewProduct(false)"/>Existing Product
+      </span>
     </div>
     <div class="form-group" *ngIf="!isNewProduct">
       <div>
         Select product:
       </div>
-      <div>
+      <div class="search-box">
         <input [(ngModel)]="selectedProductLookup"
                [typeahead]="productLookups"
                [typeaheadScrollable]="true"
                [typeaheadOptionsInScrollableView]="5"
                typeaheadOptionField="description"
                (typeaheadOnSelect)="onProductSelect()"
-               class="form-control search-box"
+               class="form-control"
                #searchInput/>
       </div>
     </div>
     <form [formGroup]="productForm"
           (ngSubmit)="onSubmit()"
-          style="display: block;width: 700px"
           novalidate>
       <div class="row">
         <div class="col-md-6">

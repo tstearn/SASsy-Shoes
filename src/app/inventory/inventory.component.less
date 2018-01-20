@@ -1,10 +1,23 @@
 @import "~assets/variables";
+@cumm-form-padding-right: 45px;
 .inventory {
-  width: min-content;
-  margin: auto;
+  width: 700px;
 
-  h3 {
-    border-bottom: 1px @orange-border solid;
+  @media (max-width: 991px) {
+    width: 300px;
+  }
+
+  .title-bar {
+    padding-right: @cumm-form-padding-right;
+    h3 {
+      border-bottom: 1px @orange-border solid;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .title-bar {
+      padding-right: 0;
+    }
   }
 
   .operation-type {
@@ -30,8 +43,21 @@
     height: auto;
   }
 
+
   .search-box {
-    width: 669px;
+    padding-right: 35px;
+    input {
+      width: 100%;
+    }
+  }
+
+
+  @media (max-width: 991px) {
+    .search-box{
+      input{
+        width: 300px;
+      }
+    }
   }
 
   .error {
@@ -40,7 +66,18 @@
 
   .button-bar {
     margin-top: 30px;
-    padding-right: 50px;
+  }
+
+  @media (min-width: 992px) {
+    .button-bar {
+      padding-right: @cumm-form-padding-right;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .button-bar {
+      padding-right: 15px;
+    }
   }
 
   sassy-color-list {
