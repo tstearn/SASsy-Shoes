@@ -88,7 +88,7 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
         description: this.productForm.get("description").value,
         style: this.productForm.get("style").value,
         colors: this.productForm.get("colors").value,
-        price: this.productForm.get("price").value as number,
+        price: parseFloat(this.productForm.get("price").value),
         sizes: this.productForm.get("sizes").value
       };
       this.productService.upsertProduct(product).then(()=>{
