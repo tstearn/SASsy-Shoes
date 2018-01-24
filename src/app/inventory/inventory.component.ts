@@ -88,7 +88,7 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
         description: this.productForm.get("description").value,
         style: this.productForm.get("style").value,
         colors: this.productForm.get("colors").value,
-        price: this.productForm.get("price").value,
+        price: this.productForm.get("price").value as number,
         sizes: this.productForm.get("sizes").value
       };
       this.productService.upsertProduct(product).then(()=>{
@@ -96,7 +96,6 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
         if(this.isNewProduct) {
           this.showErrors = false;
           this.productForm.reset();
-          this.isDirty = false;
         }
         //If existing product, refresh lookups to reflect changes in description
         else {
@@ -104,6 +103,7 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
             this.selectedProductLookup = product.description;
           });
         }
+        this.isDirty = false;
       });
     }
     else {
@@ -118,6 +118,7 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
       this.selectedProductLookup = undefined;
       this.showErrors = false;
       this.productForm.reset();
+      this.isDirty = false;
 
       this.setProductLookups();
     })
