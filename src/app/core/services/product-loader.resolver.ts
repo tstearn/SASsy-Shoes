@@ -27,7 +27,10 @@ export class ProductLoaderResolver implements Resolve<Promise<any>>{
         else {
           this.loadProductsToElastic().subscribe(()=>{
             this.configureIndex().subscribe(()=>{
-              resolve(true);
+              //Wait a couple of seconds for Elastic to index the data
+              setTimeout(()=>{
+                resolve(true);
+              },2000)
             });
           });
         }
