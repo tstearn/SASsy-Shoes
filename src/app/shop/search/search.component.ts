@@ -11,7 +11,8 @@ import {FacetChangeEvent} from "./search-facet/search-facet.component";
   template: `
     <div>Search:</div>
     <input [formControl]="searchTextBox"
-           minlength="3"/>
+           class="search-box"
+           minlength="2"/>
     <div *ngFor="let facet of facets">
       <sassy-search-facet [facet]="facet"
                           [closed]="false"
@@ -35,6 +36,8 @@ export class SearchComponent implements OnInit{
 
   ngOnInit() {
     this.searchTextBox.valueChanges
+      .debounceTime(100)
+      .filter((value:string)=> value.length === 0 || value.length >= 2)
       .subscribe(form =>{
         this.searchText = this.searchTextBox.value as string;
         this.search();

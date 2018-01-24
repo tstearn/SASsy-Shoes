@@ -27,6 +27,8 @@ export interface FacetChangeEvent {
              class="filter-controls">
           <ul *ngFor="let facetValue of facet.values">
             <li class="filter-control"
+                [attr.data-facet-name]="facet.name"
+                [attr.data-facet-value]="facetValue.value"
                 (click)="facetValueSelected(facetValue)"
                 [ngClass]="{'selected': facetValue.selected}">
               {{facetValue.label}}
