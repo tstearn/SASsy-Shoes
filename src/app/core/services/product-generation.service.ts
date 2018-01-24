@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {FacetGroup, Product} from "../domain/models";
+import {SearchFacet, Product} from "../domain/models";
 import {range} from "../utils/numberUtil";
 
 @Injectable()
@@ -9,7 +9,7 @@ export class ProductGenerationService {
   colors: string[];
   styles: string[];
   sizes: number[];
-  facets: FacetGroup[];
+  facets: SearchFacet[];
 
   constructor() {
     this.styles = ["Boot","Flat","Heel","Sandle"];

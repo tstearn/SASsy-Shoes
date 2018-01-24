@@ -1,5 +1,5 @@
 import {Injectable, EventEmitter} from "@angular/core";
-import {Product, ProductBrief, ShoeWidth, FacetValue, FacetGroup} from "../domain/models";
+import {Product, ProductBrief, ShoeWidth, SearchFacetValue, SearchFacet} from "../domain/models";
 import * as _ from 'lodash';
 import {Observable} from "rxjs";
 import {GuidService} from "./guid.service";
@@ -13,16 +13,17 @@ export class ProductMemoryService extends ProductService{
     super();
   }
 
+
+  loadProducts(): Promise<number> {
+    return Observable.of(this.prodGenService.products.length).toPromise();
+  }
+
   getAllProductBriefs() : Observable<ProductBrief[]> {
     return Observable.of(_.map(this.prodGenService.products, product=>this.productToProductBrief(product)) as ProductBrief[]);
   }
 
   getProduct(sku: string) : Promise<Product> {
     return Observable.of(_.find(this.prodGenService.products,{sku: sku})).toPromise();
-  }
-
-  getProductColors() {
-    return this.prodGenService.colors;
   }
 
   getProductVariableDomains() : Promise<any> {
@@ -63,7 +64,7 @@ export class ProductMemoryService extends ProductService{
     return Observable.of(null).toPromise();
   }
 
-  getSearchFacets() : Promise<FacetGroup[]>{
+  getSearchFacets() : Promise<SearchFacet[]>{
     return Observable.of(this.prodGenService.facets).toPromise();
   }
 

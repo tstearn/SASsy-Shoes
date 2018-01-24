@@ -7,6 +7,10 @@ import {PendingChangesGuard} from "./services/pending-changes.guard";
 import {ProductGenerationService} from "./services/product-generation.service";
 import {ProductMemoryService} from "./services/product-memory.service";
 import {ProductService} from "./services/product.service";
+import {ElasticConfigService} from "./services/elastic-config.service";
+import {ProductElasticService} from "./services/product-elastic.service";
+import {HttpClientModule} from "@angular/common/http";
+import {ProductLoaderResolver} from "./services/product-loader.resolver";
 
 
 @NgModule({
@@ -15,13 +19,16 @@ import {ProductService} from "./services/product.service";
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [
     ProductGenerationService,
-    {provide: ProductService, useClass: ProductMemoryService},
+    ElasticConfigService,
+    {provide: ProductService, useClass: ProductElasticService},
+    ProductLoaderResolver,
     GuidService,
-    PendingChangesGuard
+    PendingChangesGuard,
   ],
   exports: [
     NavBarComponent

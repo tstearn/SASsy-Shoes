@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import * as _ from 'lodash';
-import {FacetGroup, FacetValue} from "../../../core/domain/models";
+import {SearchFacet, SearchFacetValue} from "../../../core/domain/models";
 
 export interface FacetChangeEvent {
   facetName: string;
@@ -38,12 +38,12 @@ export interface FacetChangeEvent {
   styleUrls: ['search-facet.component.less']
 })
 export class SearchFacetComponent {
-  @Input()  facet: FacetGroup;
+  @Input()  facet: SearchFacet;
   @Input()  closed: boolean;
   @Output() select: EventEmitter<FacetChangeEvent> = new EventEmitter();
   facetValueSelectCount = 0;
 
-  facetValueSelected(facetValue: FacetValue) {
+  facetValueSelected(facetValue: SearchFacetValue) {
     facetValue.selected = !facetValue.selected;
     this.select.emit({
       facetName: this.facet.name,

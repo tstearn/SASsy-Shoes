@@ -1,4 +1,4 @@
-import {FacetGroup, Product, ProductBrief} from "../domain/models";
+import {SearchFacet, Product, ProductBrief} from "../domain/models";
 import {Observable} from "rxjs/Rx";
 import {EventEmitter, Injectable} from "@angular/core";
 
@@ -21,9 +21,8 @@ export abstract class ProductService {
   abstract searchProducts(searchRequest: ProductSearchRequest) : Observable<ProductBrief[]>;
   abstract upsertProduct(product: Product) : Promise<Product>;
   abstract deleteProduct(sku: string) : Promise<any>;
-  abstract getProductColors();
   abstract getProductVariableDomains() : Promise<any>;
-  abstract getSearchFacets() : Promise<FacetGroup[]>;
+  abstract getSearchFacets() : Promise<SearchFacet[]>;
 }
 
 

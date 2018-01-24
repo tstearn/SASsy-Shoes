@@ -19,16 +19,16 @@ export interface ProductInventoryItem {
   productSku: string;
 }
 
-export interface FacetValue {
+export interface SearchFacet {
+  name: string;
+  label: string;
+  values: SearchFacetValue[];
+}
+
+export interface SearchFacetValue {
   id: string;
   label: string;
   value: any;
   count?: number;
   selected?: boolean;
-}
-
-export interface FacetGroup {
-  name: string;
-  label: string;
-  values: FacetValue[];
 }

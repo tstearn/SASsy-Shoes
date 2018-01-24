@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 import * as _ from 'lodash';
-import {FacetGroup} from "../../core/domain/models";
+import {SearchFacet} from "../../core/domain/models";
 import {FacetFilter, ProductService} from "../../core/services/product.service";
 import {FacetChangeEvent} from "./search-facet/search-facet.component";
 
@@ -24,7 +24,7 @@ import {FacetChangeEvent} from "./search-facet/search-facet.component";
 export class SearchComponent implements OnInit{
   searchTextBox = new FormControl();
   searchText: string;
-  facets: FacetGroup[];
+  facets: SearchFacet[];
   facetFilters: FacetFilter[] = [];
 
   constructor(fb: FormBuilder, private productService: ProductService) {
