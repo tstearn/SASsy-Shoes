@@ -76,7 +76,7 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
         price: product.price.toFixed(2),
         colors: product.colors,
         sizes: product.sizes
-      });
+      },{emitEvent: false});
     })
   }
 
@@ -92,11 +92,11 @@ export class InventoryComponent extends AbstractEditableComponent implements OnI
         sizes: this.productForm.get("sizes").value
       };
       this.productService.upsertProduct(product).then(()=>{
-        this.isDirty = false;
         this.notificationMsg = "Saved product successfully";
         if(this.isNewProduct) {
           this.showErrors = false;
           this.productForm.reset();
+          this.isDirty = false;
         }
         //If existing product, refresh lookups to reflect changes in description
         else {
